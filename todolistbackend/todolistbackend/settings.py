@@ -30,26 +30,26 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    'https://todo-list-test-demo.herokuapp.com'
-]
-CSRF_TRUSTED_ORIGINS = [
-    'https://todo-list-test-demo.herokuapp.com'
-]
-CORS_ORIGIN_WHITELIST = [
-    'https://todo-list-test-demo.herokuapp.com'
-]
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOWED_ORIGINS = [
+#     'https://todo-list-test-demo.herokuapp.com'
+# ]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://todo-list-test-demo.herokuapp.com'
+# ]
+# CORS_ORIGIN_WHITELIST = [
+#     'https://todo-list-test-demo.herokuapp.com'
+# ]
 
-CORS_ALLOW_HEADERS = (
-    'x-requested-with',
-    'content-type',
-    'accept',
-    'origin',
-    'authorization',
-    'x-csrftoken'
-)
+# CORS_ALLOW_HEADERS = (
+#     'x-requested-with',
+#     'content-type',
+#     'accept',
+#     'origin',
+#     'authorization',
+#     'x-csrftoken'
+# )
 
 # Application definition
 
