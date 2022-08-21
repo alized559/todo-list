@@ -1,7 +1,9 @@
 {
   "/_app": "pages/_app.js",
+  "/": "pages/index.html",
+  "/todo_list_page": "pages/todo_list_page.html",
   "/_error": "pages/_error.js",
+  "/params": "pages/params.html",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/params": "pages/params.js"
+  "/404": "pages/404.html"
 }
