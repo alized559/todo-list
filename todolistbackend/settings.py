@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!g5+p0ci)al7(+6g(059*qv2&l+1_z7i*65s6zp9^$m%q-53++'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,17 +88,22 @@ WSGI_APPLICATION = 'todolistbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dehhfm1bis1ckh',
+#         'USER': 'rbthkngtcrhzng',
+#         'PASSWORD': 'ca4a968b29cfb4810f7906093e4055b1dd9006020fe8896f70ff01ebefdb9d81',
+#         'HOST': 'ec2-54-86-106-48.compute-1.amazonaws.com',
+#         'PORT': '5432'
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dehhfm1bis1ckh',
-        'USER': 'rbthkngtcrhzng',
-        'PASSWORD': 'ca4a968b29cfb4810f7906093e4055b1dd9006020fe8896f70ff01ebefdb9d81',
-        'HOST': 'ec2-54-86-106-48.compute-1.amazonaws.com',
-        'PORT': '5432'
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -143,3 +149,19 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ON_HEROKU = os.environ.get('ON_HEROKU')
+
+if ON_HEROKU:
+    DATABASE_URL = 'postgresql://<postgresql>'
+else:
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+try:
+  from local_settings import *
+except Exception as e:
+  pass
