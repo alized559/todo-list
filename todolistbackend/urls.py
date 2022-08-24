@@ -19,6 +19,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('todolist.urls'))
+    path(r'^admin/', admin.site.urls),
+    path(r'api/', include('todolist.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
