@@ -3,6 +3,7 @@ import { TEXT_COLOR, BACKGROUND_COLOR } from '/pages/params';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { getApiClient } from '../server/get';
+import { dict } from '../pages/month';
 
 const TodoModal = (props) => {
   const [label, setLabel] = useState('');
@@ -20,15 +21,34 @@ const TodoModal = (props) => {
     if (todoID !== undefined) {
       getApiClient().getTodo(todoID)
       .then(response => {
-        setLabel(response.data.todo.label);
-        setDescription(response.data.todo.description);
-        setTextColor(response.data.todo.text_color);
-        setBackColor(response.data.todo.background_color);
-        if (response.data.todo.deadline !== null) {
-          const deadline = response.data.todo.deadline.split('T');
-          setDate(deadline[0]);
-          setTime(deadline[1].slice(0, -1));
-          setWithDeadline(true);
+        if (response.data.success) {
+          setLabel(response.data.todo.label);
+          setDescription(response.data.todo.description);
+          setTextColor(response.data.todo.text_color);
+          setBackColor(response.data.todo.background_color);
+          if (response.data.todo.deadline !== null) {
+            const deadline = response.data.todo.deadline;
+            const time = '';
+            const day = '';
+            const year = '';
+            const month = '';
+            for (var i = 5; i < deadline.length - 3; i++) {
+              if (i <= 6)
+                day += deadline[i];
+              else if (i >= 8 && i <= 10)
+                month += deadline[i];
+              else if (i >= 12 && i <= 15)
+                year += deadline[i];
+              else if (i >= 16)
+                time += deadline[i];
+            }
+            const date = year + '-' + dict[month] + '-' + day;
+            setDate(date);
+            setTime(time.trim());
+            setWithDeadline(true);
+          }
+        } else {
+          setError('Something Went Wrong!');
         }
       })
       .catch(error => {
@@ -46,7 +66,7 @@ const TodoModal = (props) => {
       } else {
         getApiClient().addTodo(label, description, textColor, BackColor, date, time)
         .then(response => {
-          if (response.data === 'success') {
+          if (response.data.success) {
             setShow(false);
             setError('');
           }
@@ -65,7 +85,7 @@ const TodoModal = (props) => {
       } else {
         getApiClient().updateTodo(todoID, label, description, textColor, BackColor, date, time)
         .then(response => {
-          if (response.data === 'success') {
+          if (response.data.success) {
             setShow(false);
             setError('');
           }

@@ -12,7 +12,7 @@ const TodoCard = (props) => {
     const todoID = e.target.id;
     getApiClient().deleteTodo(todoID)
     .then(response => {
-      if (response.data === 'success') {
+      if (response.data.success) {
         setIsDeleted(true);
         setError('');
       } else {
@@ -30,7 +30,7 @@ const TodoCard = (props) => {
         {error !== ''
         ? <p className="error">{error}</p>
         : ''}
-        {todos.map((todo, index) => {
+        {todos && todos.map((todo, index) => {
           return (
             <div className="card-flex" key={todo.id}>
               <div id="card" style={{ color: todo.text_color, backgroundColor: todo.background_color }}

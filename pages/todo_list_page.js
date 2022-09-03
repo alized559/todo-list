@@ -16,8 +16,11 @@ const TodoListPage = () => {
     setIsDeleted(false);
     getApiClient().getAllTodos(searchText, filter)
     .then(response => {
-      setTodos(response.data.todos);
-      setTimeLeft(response.data.time_left);
+      if (response.data.success) {
+        setTodos(response.data.todos);
+      } else {
+        console.log('Error');
+      }
     })
     .catch(error => {
       console.log(error);
@@ -27,7 +30,11 @@ const TodoListPage = () => {
   useEffect(() => {
     getApiClient().getTimeLeft()
     .then(response => {
-      setTimeLeft(response.data.time_left);
+      if (response.data.success) {
+        setTimeLeft(response.data.time_left);
+      } else {
+        console.log('Error');
+      }
     })
     .catch(error => {
       console.log(error);

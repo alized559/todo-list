@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://127.0.0.1:8000/api/';
+const API_URL = 'http://127.0.0.1:5000/api/';
 
 function post(endpoint, data) {
   if (!data) data = new FormData();
@@ -11,14 +11,14 @@ class WebApiClient {
 
   getAllTodos(searchText, filter) {
     const data = new FormData();
-    data.append('search_text', searchText);
-    data.append('filter_result', filter);
-    return post('', data);
+    if (searchText) data.append('search_text', searchText);
+    if (filter) data.append('filter_result', filter);
+    return post('get_all_todos', data);
   }
 
   getTimeLeft() {
     const data = new FormData();
-    return post('getTimeLeft', data);
+    return post('get_time_left', data);
   }
 
   addTodo(label, description, textColor, backColor, date, time) {
@@ -27,15 +27,15 @@ class WebApiClient {
     data.append('description', description);
     data.append('text_color', textColor);
     data.append('background_color', backColor);
-    data.append('date', date);
-    data.append('time', time);
-    return post('addTodo', data);
+    if (date) data.append('date', date);
+    if (time) data.append('time', time);
+    return post('add_new_todo', data);
   }
 
   getTodo(todoID) {
     const data = new FormData();
     data.append('todo_id', todoID);
-    return post('getTodo', data);
+    return post('get_todo', data);
   }
 
   updateTodo(todoID, label, description, textColor, backColor, date, time) {
@@ -45,15 +45,15 @@ class WebApiClient {
     data.append('description', description);
     data.append('text_color', textColor);
     data.append('background_color', backColor);
-    data.append('date', date);
-    data.append('time', time);
-    return post('updateTodo', data);
+    if (date) data.append('date', date);
+    if (time) data.append('time', time);
+    return post('update_todo', data);
   }
 
   deleteTodo(todoID) {
     const data = new FormData();
     data.append('todo_id', todoID);
-    return post('deleteTodo', data);
+    return post('delete_todo', data);
   }
 }
 
