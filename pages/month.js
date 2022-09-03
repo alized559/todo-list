@@ -12,3 +12,11 @@ export const dict = {
   Nov: '11',
   Dec: '12'
 };
+
+const Month = () => {
+  return (
+    <></>
+  );
+};
+
+export default Month;
