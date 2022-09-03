@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://todo-list-test-demo.herokuapp.com/api/';
+const API_URL = 'https://127.0.0.1:8000/api/';
 
 function post(endpoint, data) {
   if (!data) data = new FormData();
