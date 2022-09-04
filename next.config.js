@@ -2,6 +2,10 @@ module.exports = {
   async rewrites() {
     return [
       {
+        source: '/api/hello',
+        destination: 'https://todo-list-test-demo.herokuapp.com/api/hello',
+      },
+      {
         source: '/api/get_all_todos',
         destination: 'https://todo-list-test-demo.herokuapp.com/api/get_all_todos',
       },

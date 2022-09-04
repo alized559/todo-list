@@ -6,6 +6,12 @@ from models.todos import Todo
 
 todo_list_api = Blueprint('todo_list_api', __name__)
 
+@todo_list_api.route('/api/hello')
+@cross_origin()
+def hello():
+	hello = 'hello'
+	return jsonify(success=True, hello=hello)
+
 @todo_list_api.route('/api/get_all_todos', methods=['POST'])
 @cross_origin()
 def get_all_todos():
