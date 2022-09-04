@@ -16,3 +16,6 @@ migrate = Migrate(app, db)
 CORS(app, support_credentials=True)
 
 app.register_blueprint(todo_list_api)
+
+if __name__ == '__main__':
+	app.run()
