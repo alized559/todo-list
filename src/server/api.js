@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function post(endpoint, data) {
   if (!data) data = new FormData();
-  return axios.post(endpoint, data);
+  return axios.post('https://todo-list-test-demo.herokuapp.com' + endpoint, data);
 }
 
 class WebApiClient {
